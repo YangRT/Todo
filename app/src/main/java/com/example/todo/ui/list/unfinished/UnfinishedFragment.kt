@@ -23,6 +23,7 @@ import com.example.todo.ui.list.event.EventDetailActivity
 import com.example.todo.ui.login.LoginActivity
 import com.example.todo.utils.PopupWindowFactory
 import com.example.todo.utils.Type
+import kotlinx.android.synthetic.main.fragment_unfinished.*
 import kotlinx.android.synthetic.main.popup_window.view.*
 import kotlinx.android.synthetic.main.popup_window2.view.*
 
@@ -34,6 +35,7 @@ class UnfinishedFragment: Fragment(),AdapterView.OnItemSelectedListener,View.OnC
     private lateinit var adapter: Adapter
     lateinit var myDataBinding:FragmentUnfinishedBinding
     private var page = 1
+    private var type = -1
     private var needClear = false
     private lateinit var myWindow: PopupWindow
     private lateinit var myWindow2: PopupWindow
@@ -91,6 +93,15 @@ class UnfinishedFragment: Fragment(),AdapterView.OnItemSelectedListener,View.OnC
                 }
             }
         })
+        myDataBinding.unfinishedRefresh.setOnRefreshListener {
+            page = 1
+            needClear = true
+            if (type > 0){
+                viewModel.getInfo(page,0,type,null)
+            }else{
+                viewModel.getInfo(page,0,null,null)
+            }
+        }
        observeData()
     }
 
@@ -107,11 +118,20 @@ class UnfinishedFragment: Fragment(),AdapterView.OnItemSelectedListener,View.OnC
                     list.addAll(it.data.datas)
                     adapter.notifyDataSetChanged()
                 }else{
+                    if(needClear){
+                        needClear = false
+                    }
                     page--
                     Toast.makeText(context,"没有更多数据", Toast.LENGTH_LONG).show()
                 }
             }else{
+                if(needClear){
+                    needClear = false
+                }
                 Toast.makeText(context,it.errorMsg, Toast.LENGTH_LONG).show()
+            }
+            if(myDataBinding.unfinishedRefresh.isRefreshing){
+                myDataBinding.unfinishedRefresh.isRefreshing = false
             }
         })
         //观察更新反馈数据
@@ -223,7 +243,8 @@ class UnfinishedFragment: Fragment(),AdapterView.OnItemSelectedListener,View.OnC
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         page = 1
-        list.clear()
+        type = position
+        needClear = true
         when (position) {
             0 -> viewModel.getInfo(page, 0, null, null)
             1 -> viewModel.getInfo(page, 0, 1, null)

@@ -38,8 +38,10 @@ class FinishedFragment : Fragment(),AdapterView.OnItemSelectedListener,View.OnCl
     private lateinit var adapter: Adapter
     private lateinit var myDataBinding:FragmentEventListBinding
     private var page = 1
+    private var type = -1
     private var deletePos = -1
     private var choicePos = -1
+    private var needClear = false
     private lateinit var myWindow:PopupWindow
     private lateinit var myWindow2:PopupWindow
 
@@ -89,6 +91,15 @@ class FinishedFragment : Fragment(),AdapterView.OnItemSelectedListener,View.OnCl
                 }
             }
         })
+        myDataBinding.finishedRefresh.setOnRefreshListener {
+            page = 1
+            needClear = true
+            if(type <= 0){
+                viewModel.getInfo(page,1,null,null)
+            }else{
+                viewModel.getInfo(page,1,type,null)
+            }
+        }
         observeData()
     }
 
@@ -98,14 +109,27 @@ class FinishedFragment : Fragment(),AdapterView.OnItemSelectedListener,View.OnCl
             val code = it.errorCode
             if(code == 0){
                 if(it.data.datas.size != 0){
+                    if(needClear){
+                        list.clear()
+                        needClear = false
+                    }
                     list.addAll(it.data.datas)
                     adapter.notifyDataSetChanged()
                 }else{
+                    if(needClear){
+                        needClear = false
+                    }
                     page--
                     Toast.makeText(context,"没有更多数据", Toast.LENGTH_LONG).show()
                 }
             }else{
+                if(needClear){
+                    needClear = false
+                }
                 Toast.makeText(context,it.errorMsg, Toast.LENGTH_LONG).show()
+            }
+            if(myDataBinding.finishedRefresh.isRefreshing){
+                myDataBinding.finishedRefresh.isRefreshing = false
             }
         })
         viewModel.deleteInfo.observe(this, Observer {
@@ -190,7 +214,8 @@ class FinishedFragment : Fragment(),AdapterView.OnItemSelectedListener,View.OnCl
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         page = 1
-        list.clear()
+        type = position
+        needClear = true
         when (position) {
             0 -> viewModel.getInfo(page, 1, null, null)
             Type.LIFE -> viewModel.getInfo(page, 1, 1, null)
