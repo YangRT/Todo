@@ -4,7 +4,7 @@ import android.util.Log
 import com.example.todo.data.network.ToDoNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
+//处理事件相关请求
 class EventRepository private constructor(private val toDoNetwork: ToDoNetwork) {
 
     suspend fun getEvent(path:Int,status:Int?,type:Int?,priority:Int?,orderby:Int?)= withContext(Dispatchers.IO){

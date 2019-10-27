@@ -113,23 +113,17 @@ class UnfinishedFragment: Fragment(),AdapterView.OnItemSelectedListener,View.OnC
                 if(it.data.datas.size != 0){
                     if(needClear){
                         list.clear()
-                        needClear = false
                     }
                     list.addAll(it.data.datas)
                     adapter.notifyDataSetChanged()
                 }else{
-                    if(needClear){
-                        needClear = false
-                    }
                     page--
                     Toast.makeText(context,"没有更多数据", Toast.LENGTH_LONG).show()
                 }
             }else{
-                if(needClear){
-                    needClear = false
-                }
                 Toast.makeText(context,it.errorMsg, Toast.LENGTH_LONG).show()
             }
+            needClear = false
             if(myDataBinding.unfinishedRefresh.isRefreshing){
                 myDataBinding.unfinishedRefresh.isRefreshing = false
             }

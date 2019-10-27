@@ -3,7 +3,7 @@ package com.example.todo.data
 import com.example.todo.data.network.ToDoNetwork
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-
+//处理登录，注册请求
 class LoginRegisterRepository private constructor(private val toDoNetwork: ToDoNetwork){
 
     suspend fun login(username:String,password:String)= withContext(Dispatchers.IO){

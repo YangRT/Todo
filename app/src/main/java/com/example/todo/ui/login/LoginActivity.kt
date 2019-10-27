@@ -29,14 +29,12 @@ class LoginActivity : AppCompatActivity() {
         val decorView = window.decorView
         decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         window.statusBarColor = Color.TRANSPARENT
-
+        //隐藏
         supportActionBar?.hide()
-
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         loginViewModel = ViewModelProviders.of(this,LoginViewModelFactory(LoginRegisterRepository.getInstance(ToDoNetwork.getInstance()))).get(LoginViewModel::class.java)
         init() //初始化
         binding.loginViewModel = loginViewModel
-
         //监听登录返回信息
         loginViewModel.info.observe(this, Observer {
             val errorCode = it.errorCode
@@ -59,9 +57,6 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.isPasswordNotNull.set(0)
         loginViewModel.isUsernameNotNull.set(0)
 
-
-
-
         //监听editText焦点和输入改变UI
         binding.loginUsername.setOnFocusChangeListener { _, hasFocus ->
             if(hasFocus) {
@@ -80,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
         }
         binding.loginUsername.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
-
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             @Suppress("UNREACHABLE_CODE")
@@ -98,11 +92,9 @@ class LoginActivity : AppCompatActivity() {
         })
         binding.loginPassword.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(s: Editable?) {
-
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
             @Suppress("UNREACHABLE_CODE")
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if(s == null){
@@ -115,7 +107,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             }
-
         })
 
         //设置监听
@@ -125,7 +116,5 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this,RegisterActivity::class.java)
             startActivity(intent) }
         binding.loginButton.setOnClickListener { loginViewModel.login(binding.loginUsername.text.toString(),binding.loginPassword.text.toString())}
-        binding.loginToRegister.setOnClickListener { intent = Intent(this,RegisterActivity::class.java)
-        startActivity(intent)}
     }
 }
