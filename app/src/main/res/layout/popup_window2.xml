@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:background="@drawable/window_border"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <TextView
+            android:text="完成"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:id="@+id/window2_text1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#535151"/>
+    <TextView
+            android:text="删除"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="#EE0D0D"
+            android:id="@+id/window2_text2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+</LinearLayout>

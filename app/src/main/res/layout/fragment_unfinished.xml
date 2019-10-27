@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="viewModel" type="com.example.todo.ui.list.unfinished.UnfinishedListViewModel"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+    <LinearLayout
+            android:background="@color/colorLearn"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+                android:id="@+id/more"
+                android:scaleType="center"
+                android:src="@drawable/more"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"/>
+        <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/unfinished_list_spinner"
+                android:spinnerMode="dropdown"
+                android:overlapAnchor="false"
+                android:entries="@array/type"
+                android:gravity="center"
+                android:popupBackground="@color/colorLearn"
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:theme="@style/common_spinner"
+                android:layout_height="50dp"/>
+      <ImageView
+              android:id="@+id/image_add"
+              android:scaleType="center"
+              android:src="@drawable/add"
+              android:layout_weight="1"
+              android:layout_width="0dp"
+              android:layout_height="50dp"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/unfinished_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+</layout>

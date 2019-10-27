@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        tools:context=".ui.register.RegisterActivity">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="registerViewModel" type="com.example.todo.ui.register.RegisterViewModel"/>
+    </data>
+    <LinearLayout
+            android:background="@drawable/login_background"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <TextView
+            android:maxLines="1"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:text="@string/register"
+            android:textSize="90sp"
+            android:textColor="#ffffff"
+            android:typeface="serif"
+            android:textStyle="italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/border"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <EditText
+                    android:id="@+id/register_username"
+                    android:hint="@{registerViewModel.isUsernameFocus()==1 ? @string/null_value : @string/username}"
+                    android:textColorHint="#000000"
+                    android:textSize="22sp"
+                    android:cursorVisible="@{registerViewModel.isUsernameFocus()==1? true : false}"
+                    android:textCursorDrawable="@drawable/edit_cursor_color"
+                    android:paddingStart="5dp"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"/>
+            <ImageView
+                    android:id="@+id/register_username_clear_button"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_clear_black_24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="@{registerViewModel.isUsernameNotNull()+registerViewModel.isUsernameFocus()==2 ? View.VISIBLE : View.INVISIBLE}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/border"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <EditText
+                    android:id="@+id/register_password"
+                    android:hint="@{registerViewModel.isPasswordFocus()==1 ? @string/null_value : @string/password}"
+                    android:paddingStart="5dp"
+                    android:textSize="22sp"
+                    android:textCursorDrawable="@drawable/edit_cursor_color"
+                    android:textColorHint="#000000"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"/>
+
+            <ImageView
+                    android:id="@+id/register_password_clear_button"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_clear_black_24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="@{registerViewModel.isPasswordNotNull()+registerViewModel.isPasswordFocus()==2 ? View.VISIBLE : View.INVISIBLE}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/border"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <EditText
+                    android:id="@+id/register_re_password"
+                    android:hint="@{registerViewModel.isRePasswordFocus()==1 ? @string/null_value : @string/password}"
+                    android:paddingStart="5dp"
+                    android:textSize="22sp"
+                    android:textCursorDrawable="@drawable/edit_cursor_color"
+                    android:textColorHint="#000000"
+                    android:background="@null"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:layout_width="275dp"
+                    android:layout_height="60dp"/>
+
+            <ImageView
+                    android:id="@+id/re_password_clear_button"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_clear_black_24dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="@{registerViewModel.isRePasswordNotNull()+registerViewModel.isRePasswordFocus()==2 ? View.VISIBLE : View.INVISIBLE}"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+        </LinearLayout>
+
+    <Button
+            android:id="@+id/register_button"
+            android:text="@string/register"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_border"
+            android:layout_width="160dp"
+            android:layout_height="50dp"/>
+    </LinearLayout>
+</layout>

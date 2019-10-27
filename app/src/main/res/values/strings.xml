@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Todo</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="login">login</string>
+    <string name="register">Register</string>
+    <string name="login_text">Login .</string>
+    <string name="repassword">re_password</string>
+    <string name="null_value"></string>
+    <string name="unfinished">正在进行</string>
+    <string name="finished">已完成</string>
+    <string name="learn">学习</string>
+    <string name="work">工作</string>
+    <string name="life">生活</string>
+    <string name="other">其他</string>
+    <string name="title">标题：</string>
+    <string name="content">内容：</string>
+    <string name="type">类型：</string>
+    <string name="save">保存</string>
+    <string name="edit">编辑</string>
+    <string name="commit">提交</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
